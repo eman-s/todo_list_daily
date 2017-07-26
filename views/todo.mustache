@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>shit I gotta do</title>
+</head>
+
+<body>
+  <div class="wrapper">
+    <form action="/" method="post">
+      <div class="header">
+        <span class="title">tew dew</span>
+      </div>
+      <div class="fields" id="fields">
+        <input type="text" name="todo" placeholder="wut u gotta do?" />
+        <button type="submit">Submit</button>
+      </div>
+    </form>
+  </div>
+  <ul>
+    <li>clean my socks</li>
+    <button type="button" name="complete">mark as complete</button>
+        {{ #errors }}
+          <li>{{ msg }} value: {{ value }}</li>
+        {{ /errors }}
+      </ul>
+</body>
+
+</html>

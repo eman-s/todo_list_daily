@@ -18,3 +18,14 @@ app.use(bodyParser.urlencoded({extended: false}));
 
 //config Express Validator
 app.use(expressValidator());
+
+app.get('/', function(req, res){
+  res.render('todo');
+});
+
+
+
+
+app.listen(3000, function(){
+  console.log('server started');
+});

@@ -27,13 +27,25 @@ app.get('/', function(req, res){
 });
 
 app.post('/', function(req, res){
-  console.log(req.body);
-  stuffToDo.push(req.body);
-  console.log(stuffToDo);
+  var schema = {
+    'todo': {
+      notEmpty: true,
+      isLength: {
+        options: [{max : 100}],
+        errorMessage: 'too much stuff to do'
+      },
+      errorMessage: 'not enough stuff to do'
+    },
+  };
+  req.assert(schema);
   req.getValidationResult().then(function(results){
-    res.render('todo', {todo: req.body});
+    if (results.isEmpty()){
+      stuffToDo.push(req.body);
+      res.render('todo', {todo:stuffToDo});
+    } else {
+      res.render('todo', {errors: results.array()});
+    }
   });
-
 });
 
 

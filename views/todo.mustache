@@ -26,6 +26,13 @@
           <button type="button" name="complete">mark as complete</button>
         {{ /todo }}
       </ul>
+      <div class="error">
+        <ul>
+      {{ #errors }}
+        <p>{{ msg }}</p>
+      {{ /errors }}
+    </ul>
+      </div>
 </body>
 
 </html>

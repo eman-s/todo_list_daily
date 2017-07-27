@@ -38,14 +38,14 @@ app.post('/', function(req, res){
     },
   };
   req.assert(schema);
-  req.getValidationResult().then(function(results){
-    if (results.isEmpty()){
-      stuffToDo.push(req.body);
-      res.render('todo', {todo:stuffToDo});
-    } else {
-      res.render('todo', {errors: results.array()});
-    }
-  });
+    req.getValidationResult().then(function(results){
+      if (results.isEmpty()){
+        stuffToDo.push(req.body);
+        res.render('todo', {todo:stuffToDo});
+      } else {
+        res.render('todo', {errors: results.array()});
+      }
+    });
 });
 
 

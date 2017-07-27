@@ -20,19 +20,24 @@
   </div>
   <ul>
     <li>clean my socks</li>
-    <button type="button" name="complete">mark as complete</button>
-        {{ #todo }}
-          <li>{{ todo }}</li>
-          <button type="button" name="complete">mark as complete</button>
-        {{ /todo }}
-      </ul>
-      <div class="error">
-        <ul>
+    <button type="button" name="complete">mark as complete</button> {{ #todo }}
+    <li>{{ todo }}</li>
+    <button type="submit" name="complete">mark as complete</button> {{ /todo }}
+  </ul>
+  <div class="error">
+    <ul>
       {{ #errors }}
-        <p>{{ msg }}</p>
+      <p>{{ msg }}</p>
       {{ /errors }}
     </ul>
-      </div>
+  </div>
+  <!-- <div class="complete">
+    <span class="title">completed</span>
+  </div>
+  {{ #todo }}
+  <li>{{ todo }}</li>
+   {{ /todo }} -->
+  </div>
 </body>
 
 </html>

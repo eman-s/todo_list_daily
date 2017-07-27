@@ -19,10 +19,15 @@
     </form>
   </div>
   <ul>
-    <li>clean my socks</li>
+    <li> clean my socks</li>
     <button type="button" name="complete">mark as complete</button> {{ #todo }}
-    <li>{{ todo }}</li>
-    <button type="submit" name="complete">mark as complete</button> {{ /todo }}
+
+    <li>
+      {{#complete}} <del> {{/complete}} {{ text }} {{#complete}} <del> {{/complete}}
+      <form action="/mark-complete/{{id}}" method="post"><button type="submit" name="complete">mark as complete</button></form></li>
+
+    {{ /todo }}
+
   </ul>
   <div class="error">
     <ul>
@@ -31,13 +36,7 @@
       {{ /errors }}
     </ul>
   </div>
-  <!-- <div class="complete">
-    <span class="title">completed</span>
-  </div>
-  {{ #todo }}
-  <li>{{ todo }}</li>
-   {{ /todo }} -->
-  </div>
+
 </body>
 
 </html>

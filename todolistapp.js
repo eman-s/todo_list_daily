@@ -17,38 +17,64 @@ app.use(express.static('public'));
 
 //config body parser
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
 
 //config Express Validator
 app.use(expressValidator());
 
-app.get('/', function(req, res){
-  res.render('todo');
+app.get('/', function(req, res) {
+  res.render('todo', {
+    todo: stuffToDo
+  });
 });
 
-app.post('/', function(req, res){
+app.post('/', function(req, res) {
   var schema = {
     'todo': {
       notEmpty: true,
       isLength: {
-        options: [{max : 100}],
+        options: [{
+          max: 100
+        }],
         errorMessage: 'too much stuff to do'
       },
       errorMessage: 'not enough stuff to do'
     },
   };
   req.assert(schema);
-    req.getValidationResult().then(function(results){
-      if (results.isEmpty()){
-        stuffToDo.push(req.body);
-        res.render('todo', {todo:stuffToDo});
-      } else {
-        res.render('todo', {errors: results.array()});
+  req.getValidationResult().then(function(results) {
+    if (results.isEmpty()) {
+
+      let id = parseInt(Math.random() * 1000);
+      newTodoObject = {
+        text: req.body.todo,
+        id: id
       }
-    });
+      stuffToDo.push(newTodoObject);
+      console.log(stuffToDo)
+      res.render('todo', {
+        todo: stuffToDo
+      });
+    } else {
+      res.render('todo', {
+        errors: results.array()
+      });
+    }
+  });
 });
 
+app.post('/mark-complete/:id', function(req, res) {
+  let idOfCompleteTodo = parseInt(req.params.id);
+  let completedTodo = stuffToDo.find(function(todo) {
+    return todo.id === idOfCompleteTodo
+  });
+  completedTodo.complete = true;
+  res.redirect('/');
+})
 
-app.listen(3000, function(){
+
+app.listen(3000, function() {
   console.log('server started');
 });

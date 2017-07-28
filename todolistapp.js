@@ -59,6 +59,7 @@ app.post('/', function(req, res) {
       });
     } else {
       res.render('todo', {
+        todo: stuffToDo,
         errors: results.array()
       });
     }
